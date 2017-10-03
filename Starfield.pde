@@ -1,7 +1,7 @@
-//your code here
+int x,y;
 void setup()
 {
-	//your code here
+	size(250,450);
 }
 void draw()
 {
@@ -9,18 +9,27 @@ void draw()
 }
 class NormalParticle
 {
-	//your code here
+  double nX,nY,nSpeed,nDir;
+  int ncolor;
+  NormalParticle()
+  {
+    nX=0;
+    nY=125;
+    nSpeed=5;
+    ndir=
+  }
 }
 interface Particle
 {
-	//your code here
+  void.public move();
+  void.public show();
 }
 class OddballParticle //uses an interface
 {
-	//your code here
+	double oX,oY,oSpeed,oDir;
+  int ocolor;
 }
 class JumboParticle //uses inheritance
 {
-	//your code here
+	double jX,jY,jSpeed,jDir
 }
-
