@@ -7,7 +7,7 @@ void draw()
 {
 	//your code here
 }
-class NormalParticle
+class NormalParticle implements Particle
 {
   double nX,nY,nSpeed,nDir;
   int ncolor;
@@ -16,20 +16,42 @@ class NormalParticle
     nX=0;
     nY=125;
     nSpeed=5;
-    ndir=
+    nDir=Math.PI*Math.Random();
   }
 }
+public void move()
+{
+  nX=nX+(Math.cos(nDir)*nSpeed);
+  nY=nY+(Math.sin(nDir)*nSpeed);
+}
+public void show()
+{
+  fill((int)(Math.random(265)),(int)(Math.random(265)),(int)(Math.random(265)))
+  ellipse(nX,nY,20,20);
+}
+  
 interface Particle
 {
   void.public move();
   void.public show();
 }
-class OddballParticle //uses an interface
+class OddballParticle implements Particle
 {
 	double oX,oY,oSpeed,oDir;
   int ocolor;
+  OddballParticle()
+  {
+    
 }
-class JumboParticle //uses inheritance
+class JumboParticle extends NormalParticle
 {
-	double jX,jY,jSpeed,jDir
-}
+	public void move()
+  {
+    nX=nX+(Math.cos(nDir)*15);
+    nY=nY+(Math.sin(nDir)*15);
+  }
+  public void show()
+  {
+    fill(0);
+    ellipse
+    
