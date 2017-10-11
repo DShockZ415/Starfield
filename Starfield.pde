@@ -1,10 +1,36 @@
 Particle[] toho;
-float speedboost=0;
+float x=250;
+float y=250;
 void setup()
 {
   background(0);
-	size(250,450);
-  toho=new Particle[20];
+	size(500,500);
+  toho=new Particle[500];
+  for(int i=0;i<toho.length;i++)
+  {
+    toho[i]=new NormalParticle();
+  }
+  for(int i=toho.length-1;i<toho.length;i++)
+  {
+    toho[i]=new OddballParticle();
+  }
+  for(int i=toho.length-50;i<toho.length-1;i++)
+  {
+    toho[i]=new JumboParticle();
+  }
+}
+
+void draw()
+{
+  background(0);
+	for(int i=0;i<toho.length;i++)
+  {
+    toho[i].move();
+    toho[i].show();
+  }
+}
+void mousePressed()
+{
   for(int i=0;i<toho.length;i++)
   {
     toho[i]=new NormalParticle();
@@ -18,25 +44,17 @@ void setup()
     toho[i]=new JumboParticle();
   }
 }
-
-void draw()
-{
-	for(int i=0;i<toho.length;i++)
-  {
-    toho[i].move();
-    toho[i].show();
-  }
-}
 class NormalParticle implements Particle
 {
   float nX,nY,nSpeed,nDir;
-  int ncolor;
+  int nSize;
   NormalParticle()
   {
-    nX=125;
-    nY=0;
-    nSpeed=.1;
-    nDir=(float)(PI*Math.random());
+    nX=x;
+    nY=y;
+    nSpeed=(int)((Math.random()*3)+1);
+    nSize=20;
+    nDir=(float)(PI*2*Math.random());
   }
 public void move()
 {
@@ -46,7 +64,7 @@ public void move()
 public void show()
 {
   fill((int)(Math.random()*265),(int)(Math.random()*265),(int)(Math.random()*265));
-  ellipse(nX,nY,20,20);
+  ellipse(nX,nY,nSize,nSize);
 }
 }
   
@@ -58,40 +76,32 @@ interface Particle
 class OddballParticle implements Particle
 {
 	float nX,nY,nSpeed,nDir;
-  int ncolor;
+  int nSize;
   OddballParticle()
   {
-    nX=125;
-    nY=225;
-    nSpeed=.5+speedboost;
+    nX=y;
+    nY=y;
+    nSpeed=.5;
+    nSize=50;
     nDir=(float)(Math.PI*2*Math.random());
   }
   public void move()
   {
-    nX=nX+cos(nDir)*nSpeed;
-    nY=nY+sin(nDir)*nSpeed;
-    if(mousePressed)
-      speedboost=speedboost+100;
-    else
-      speedboost=0;
+    nX=nX+(int)((Math.random()*2)-1);
+    nY=nY+(int)((Math.random()*2)-1);
   }
   public void show()
   {
     fill(255);
-    ellipse(nX,nY,50,50);
+    ellipse(nX,nY,nSize,nSize);
   }
 }
     
 class JumboParticle extends NormalParticle
 {
-	public void move()
+  JumboParticle()
   {
-  nX=nX+cos(nDir)*nSpeed;
-  nY=nY+sin(nDir)*nSpeed;
-  }
-  public void show()
-  {
-    fill(255);
-    ellipse(nX,nY,50,50);
+    nDir=(float)(PI*2*Math.random());
+    nSize=50;
   }
 }
